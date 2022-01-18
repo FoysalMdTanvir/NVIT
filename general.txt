@@ -1,0 +1,3 @@
+superuser: foysal
+email: foysal@gmail.com
+password: 123456 

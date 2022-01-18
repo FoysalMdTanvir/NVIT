@@ -1,0 +1,42 @@
+{% extends 'Music/base.html' %}
+{% block body_block %}
+
+{% if artist_info.profile_pic %}
+<img src="/media/{{artist_info.profile_pic}}" width="250px" height="250px" class="rounded-circle mx-auto d-block">
+{% else %}
+<img src="/media/profile_pics/default_pic.PNG" width="250px" height="250px" class="rounded-circle mx-auto d-block">
+{% endif %}
+<br><br>
+<div class="row">
+  <div class="col-sm-10" style="padding:10px">
+    <h5>Artist Name: {{artist_info.first_name}} {{artist_info.last_name}}</h5>
+    <h5>Instrument: {{artist_info.instrument}}</h5>
+    <h5>Artist Ratting: {{artist_rating.num_stars__avg}}</h5>
+  </div>
+  <div class="col-sm-2">
+    <a href="{% url 'Music:edit_artist' artist_id=artist_info.id %}" class="btn btn-outline-info">Edit</a>
+    <a href="{% url 'Music:delete_musician' artist_id=artist_info.id %}" class="btn btn-outline-danger" onclick="return confirm('Delete Musician?')">Delete</a>
+  </div>
+</div>
+
+<br><br>
+
+<h4>Album List</h4>
+<table class="table table-bordered">
+  <tr class="table-primary">
+    <th>Album Name</th>
+    <th>Release Date</th>
+    <th>Ratting</th>
+    <th>Album Cover Photo</th>
+  </tr>
+  {% for album in album_list %}
+  <tr>
+    <td><a href="{% url 'Music:edit_album' album_id=album.id %}">{{ album.name }}</a></td>
+    <td>{{ album.release_date|date:"d-M, Y" }}</td>
+    <td>{{ album.num_stars }}</td>
+    <td><img src="/media/{{album.image}}" width="150px" height="150px" class="circle"></td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

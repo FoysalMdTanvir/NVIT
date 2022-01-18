@@ -1,0 +1,17 @@
+{% extends 'Music/base.html' %}
+{% block body_block %}
+<h4>Musicians</h4>
+<ul>
+  {% if musician_list %}
+  {% for musician in musician_list %}
+  {% if musician.profile_pic %}
+  <li><img src="/media/{{musician.profile_pic}}" width="100px" height="100px" class="rounded-circle"> &nbsp;<a href="{% url 'Music:album_list' artist_id=musician.id %}">{{musician.first_name}} {{musician.last_name}}</a></li> <br>
+  {% else %}
+  <li> <img src="/media/profile_pics/default_pic.PNG" width="100px" height="100px" class="rounded-circle">&nbsp; <a href="{% url 'Music:album_list' artist_id=musician.id %}">{{musician.first_name}} {{musician.last_name}}</a></li> <br>
+  {% endif %}
+  {% endfor %}
+  {% else %}
+  <h4>No Musician in the list</h4>
+  {% endif %}
+</ul>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'Music/base.html' %}
+{% load crispy_forms_tags %}
+{% block body_block %}
+<h4>Edit Artist</h4>
+<form method="POST" enctype="multipart/form-data">
+  {{ edit_form|crispy }}
+  {% csrf_token %}
+  <input type="submit" name="submit" value="Update" class="btn btn-outline-primary btn-sm">
+</form>
+{% endblock %}
